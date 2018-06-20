@@ -1,0 +1,18 @@
+{
+  "name": "wadokei",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "kristen kagei",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "ipify": "^2.0.0",
+    "request": "^2.87.0"
+  },
+  "devDependencies": {
+    "http": "0.0.0"
+  }
+}
