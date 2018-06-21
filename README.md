@@ -7,3 +7,5 @@ https://www.japantimes.co.jp/community/2011/10/22/our-lives/telling-time-with-an
 https://sunrise-sunset.org/api
 
 https://sunrise-sunset.org/api
+
+https://github.com/joseluisq/timelite

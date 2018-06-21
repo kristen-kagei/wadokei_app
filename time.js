@@ -24,15 +24,58 @@ request(locationUrl, function (err, response, body) {
             } else {
                 let info = JSON.parse(body);
                 let placeName = location; 
+
+                //all results from JSON parse
                 let results = new Object(info.results);
+
+                //sunrise TIME
+                let sunrise = results.sunrise; 
+
+                //sunset TIME
+                let sunset = results.sunset;
+
+                //day length
+                let day_length = results.day_length;
+
+                //splitting day length by : 
+                let min = day_length.split(':');
+
+                //convert to full day minutes
+                let day_minutes = (+min[0]*60 +(+min[1]))
+                
+                //minutes in night
+                let night_minutes = 1440-day_minutes;
+
+                //day minutes in six installments for the animals
+                let wadokei_day = day_minutes/6;
+
+                //night minutes in six installments for the animals
+                let wadokei_night = night_minutes/6;
+
+                function toTime(minutes){
+                    var sign = minutes <0 ? "-" : "";
+                    var mins = Math.floor(Math.abs(minutes));
+                    var sec = Math.floor((Math.abs(minutes)* 60) % 60);
+                    return sign + (mins < 10 ? "0" : "") + mins + ":" + (sec < 10 ? "0" :"") + sec;
+                }
+                //getting all times 
                 for(let key in results) {
                     if (results.hasOwnProperty(key)) {
                         console.log(results[key]);
                     }
-                }                
+                } 
                 
+
+                console.log(placeName);
                 console.log(typeof results);
                 console.log(results);
+                console.log(sunrise);
+                console.log(sunset);
+                console.log(day_length);
+                console.log(day_minutes);
+                console.log(night_minutes);
+                console.log(wadokei_day);
+                console.log(wadokei_night);
             }
         })
     }
