@@ -1,7 +1,5 @@
 
 
-let add = require('timelite');
-
 let request = require('request');
 
 let _ip = "205.153.36.170";
@@ -16,7 +14,7 @@ request(locationUrl, function (err, response, body) {
         let lat = `${info.latitude}`;
         let lng = `${info.longitude}`;
         let location = `${info.location.capital}`;
-        let lightURL = `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}&date=today`;
+        let lightURL = `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}&date=today&formatted=0`;
 
         request(lightURL, location, function(err, response, body) {
             if(err) {
@@ -52,19 +50,30 @@ request(locationUrl, function (err, response, body) {
                 //night minutes in six installments for the animals
                 let wadokei_night = night_minutes/6;
 
+                //convert back to : format
                 function toTime(minutes){
                     var sign = minutes <0 ? "-" : "";
-                    var mins = Math.floor(Math.abs(minutes));
-                    var sec = Math.floor((Math.abs(minutes)* 60) % 60);
-                    return sign + (mins < 10 ? "0" : "") + mins + ":" + (sec < 10 ? "0" :"") + sec;
+                    var hrs = Math.floor(Math.abs(minutes));
+                    var mins = Math.floor(Math.abs(minutes)*60 % 60)
+                    var sec = Math.floor(Math.abs((minutes)*60)/60);
+                    return sign + (hrs < 10 ? "0" : "") + hrs + ":" + (mins < 10 ? "0" : "") + mins + ":" + (sec < 10 ? "0" :"") + sec;
+                };
+
+                //add times
+                function addTimes(time1, time2){
+                    let nextHour = time1 + time2;
+                    return nextHour;
                 }
-                //getting all times 
-                for(let key in results) {
-                    if (results.hasOwnProperty(key)) {
-                        console.log(results[key]);
-                    }
-                } 
                 
+                console.log(addTimes(sunrise,toTime(wadokei_day/60)))
+                //getting all times 
+                // for(let key in results) {
+                //     if (results.hasOwnProperty(key)) {
+                //         console.log(results[key]);
+                //     }
+                // } 
+                
+
 
                 console.log(placeName);
                 console.log(typeof results);
@@ -76,6 +85,8 @@ request(locationUrl, function (err, response, body) {
                 console.log(night_minutes);
                 console.log(wadokei_day);
                 console.log(wadokei_night);
+                console.log(toTime(wadokei_day/60));
+                console.log(toTime(wadokei_night/60));
             }
         })
     }

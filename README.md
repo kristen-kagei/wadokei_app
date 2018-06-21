@@ -9,3 +9,5 @@ https://sunrise-sunset.org/api
 https://sunrise-sunset.org/api
 
 https://github.com/joseluisq/timelite
+
+https://services.timeanddate.com/api/services/dstlist.html
