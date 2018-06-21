@@ -1,5 +1,9 @@
 
+
+let add = require('timelite');
+
 let request = require('request');
+
 let _ip = "205.153.36.170";
 let apiKey = '44d9535d03cf69a0e039518aac11f910';
 let locationUrl = `http://api.ipstack.com/${_ip}?access_key=${apiKey}`;
@@ -23,6 +27,7 @@ request(locationUrl, function (err, response, body) {
                 let results = info.results; 
                 let sunrise = results.sunrise; 
                 let sunset = results.sunset;
+
                 let day_length = results.day_length;
 
                 let min = day_length.split(':');
@@ -38,8 +43,13 @@ request(locationUrl, function (err, response, body) {
                 let day_divisions = wadokei_day/4;
                 let night_divisions = wadokei_night/4;
 
+                let hourDecimal = (wadokei_day/60);
+                let temp = new Array(); 
+                temp = hourDecimal.split('.');
+                let M = Math.floor((hourDecimal%1) *60);
+
                 let rabbit = sunrise; 
-                
+               
 
 
                 console.log(placeName);
@@ -53,6 +63,8 @@ request(locationUrl, function (err, response, body) {
                 console.log(day_divisions);
                 console.log(night_divisions);
                 console.log(rabbit);
+                console.log(back2hours);
+
             }
         })
     }
